@@ -1,10 +1,11 @@
 import * as fs from "node:fs";
+import type { Todo } from "./types.js";
 
-interface Todo {
-    id: number;
-    title: string;
-    completed: boolean;
-}
+/*interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+}*/
 
 let todos: Todo[] = loadTodos();
 
