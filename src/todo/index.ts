@@ -1,5 +1,6 @@
 import * as fs from "node:fs";
 import type { Todo } from "./types.js";
+import { loadTodos } from "./storage.js";
 
 /*interface Todo {
   id: number;
@@ -7,17 +8,7 @@ import type { Todo } from "./types.js";
   completed: boolean;
 }*/
 
-let todos: Todo[] = loadTodos();
-
-function loadTodos(): Todo[] {
-
-    if(fs.existsSync("todos.json")){
-        const json = fs.readFileSync("todos.json", "utf-8");
-        return JSON.parse(json);
-    } else {
-        return [];
-    }
-}
+let todos: Todo[] = loadTodos("todos.json");
 
 //タスク追加
 function addTodo(title: string): void {
