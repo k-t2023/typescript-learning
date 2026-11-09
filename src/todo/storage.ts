@@ -9,3 +9,11 @@ export function loadTodos(filePath: string): Todo[] {
   const data = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(data) as Todo[];
 }
+
+export function saveTodos(
+  filePath: string,
+  todos: Todo[]
+): void {
+  const json = JSON.stringify(todos);
+  fs.writeFileSync(filePath, json, "utf-8");
+}

@@ -1,5 +1,5 @@
 import * as fs from "node:fs";
-import { loadTodos } from "./storage.js";
+import { loadTodos, saveTodos } from "./storage.js";
 /*interface Todo {
   id: number;
   title: string;
@@ -20,7 +20,7 @@ function addTodo(title) {
     };
     //配列に追加
     todos.push(newTodo);
-    saveTodos();
+    saveTodos("todos.json", todos);
 }
 //一覧表示
 function showTodos() {
@@ -33,7 +33,7 @@ function completeTodo(id) {
     const todo = todos.find((todo) => todo.id === id);
     if (todo) {
         todo.completed = true;
-        saveTodos();
+        saveTodos("todos.json", todos);
     }
     else {
         console.log("タスクが見つかりません");
@@ -51,15 +51,6 @@ completeTodo(99);
 // ==========================================
 const command = process.argv[2];
 const title = process.argv[3];
-//console.log(command);
-//console.log(title);
-// ==========================================
-// JSONファイルへの書き込み
-// ==========================================
-function saveTodos() {
-    const json = JSON.stringify(todos);
-    fs.writeFileSync("todos.json", json, "utf-8");
-}
 if (command === "add") {
     if (title) {
         addTodo(title);
@@ -96,7 +87,7 @@ function deleteTodo(id) {
     const result = todos.filter(todo => todo.id !== id);
     if (todos.length !== result.length) {
         todos = result;
-        saveTodos();
+        saveTodos("todos.json", todos);
     }
     else {
         console.log("タスクが見つかりません");
