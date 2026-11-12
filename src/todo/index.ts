@@ -62,10 +62,10 @@ const command = process.argv[2];
 const title = process.argv[3];
     
 if(command === "add"){
-    if(title){
+    if(title && title.trim() !== ""){
         addTodo(title);
     } else {
-        console.log("タスク名を指定してください");
+        console.log("エラー: Todoの内容を入力してください");
     }
 } else if(command === "list"){    
     showTodos();

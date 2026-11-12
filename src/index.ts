@@ -56,30 +56,6 @@ const members: User[]  = [
     }
 ];
 
-
-// 偶数だけを抽出
-/*const member = members.filter((user) => user.isActive === true);
-
-
-member.forEach((m) => {
-    console.log(m.name);
-});*/
-
-
-//const names = members.map((user) => user.name);
-
-//console.log(names);
-
-//const member = members.filter((user) => user.isActive === true);
-//const activeNames = member.map((user) => user.name);
-
-
-/*const activeNames = members
-  .filter((user) => user.isActive === true)
-  .map((user) => user.name);
-
-console.log(activeNames);*/
-
 const str = members.find((user)=> user.id == 99);
 
 if(str){
@@ -89,23 +65,6 @@ if(str){
 }
 
 type UserStatus = "active" | "inactive";
-
-/*const status:UserStatus = "active";
-console.log(status);    
-
-interface Account {
-    id:number,
-    name:string, 
-    status:UserStatus
-}
-
-const account: Account = {
-    id: 1,
-    name: "Taro",
-    status: "active"
-};
-
-console.log(account.status);*/
 
 //getStatusMessage関数
 const status:UserStatus = "inactive";
@@ -154,19 +113,22 @@ async function main2(): Promise<void> {
     console.log("処理完了");
 }
 
-//main2();
-
-
-async function fetchUserName(): Promise<string> {
+async function fetchUserName(id: number): Promise<string> {
     console.log("ユーザー情報を取得中...");
     await wait(1000);
 
-    throw new Error("ユーザー取得に失敗しました");
+    const user = members.find((user) => user.id === id);
+
+    if (user) {
+        return user.name;
+    } else {
+        throw new Error("ユーザーが見つかりません");
+    }
 }
 
 async function main(): Promise<void> {
     try{
-        const userName = await fetchUserName();
+        const userName = await fetchUserName(99);
         console.log("取得したユーザー: "+userName);
     }
     catch(error){
