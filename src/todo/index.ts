@@ -26,10 +26,16 @@ function addTodo(title: string): void {
     //配列に追加
     todos.push(newTodo);
     saveTodos("todos.json", todos);
+
+    console.log(`Todoを追加しました: ${title}`);
 }
 
 //一覧表示
 function showTodos(): void {
+    if (todos.length === 0) {
+        console.log("Todoはありません");
+        return;
+    }
     todos.forEach((todo) => {
         const status = todo.completed ? "完了" : "未完了";
         console.log(`${todo.id}: ${todo.title} [${status}] `);
@@ -41,6 +47,7 @@ function completeTodo(id: number): void {
     if(todo){
         todo.completed = true;
         saveTodos("todos.json", todos);
+        console.log(`Todoを完了しました: ${todo.title}`);
     } else {
         console.log("タスクが見つかりません");
     }
@@ -93,6 +100,7 @@ function deleteTodo(id: number): void {
     if(todos.length !== result.length){
         todos = result;
         saveTodos("todos.json", todos);
+        console.log(`Todoを削除しました: ID ${id}`)
     } else {
         console.log("タスクが見つかりません");
     }
