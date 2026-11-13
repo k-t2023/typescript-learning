@@ -90,6 +90,8 @@ if(command === "add"){
     } else {
         console.log("正しいIDを指定してください");
     }
+} else if (command === "help") {
+        showHelp();    
 } else {
     console.log("不明なコマンドです");
 }
@@ -104,4 +106,13 @@ function deleteTodo(id: number): void {
     } else {
         console.log("タスクが見つかりません");
     }
+}
+
+function showHelp(): void {
+  console.log("Todo CLIの使い方:");
+  console.log("  add <タイトル>  Todoを追加");
+  console.log("  list           Todo一覧を表示");
+  console.log("  complete <ID>  Todoを完了");
+  console.log("  delete <ID>    Todoを削除");
+  console.log("  help           使い方を表示");
 }
