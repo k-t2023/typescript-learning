@@ -40,6 +40,13 @@ function showTodos(): void {
         const status = todo.completed ? "完了" : "未完了";
         console.log(`${todo.id}: ${todo.title} [${status}] `);
     });
+    console.log(`合計: ${todos.length}件`);
+
+    const incompleteCount = todos.filter((todo) => !todo.completed).length;
+    console.log(`未完了: ${incompleteCount}件`);
+
+    const completedCount = todos.filter((todo) => todo.completed).length;
+    console.log(`完了: ${completedCount}件`);
 }
 
 function completeTodo(id: number): void {
