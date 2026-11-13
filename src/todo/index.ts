@@ -94,6 +94,7 @@ if(command === "add"){
         showHelp();    
 } else {
     console.log("不明なコマンドです");
+    showHelp();
 }
 
 
