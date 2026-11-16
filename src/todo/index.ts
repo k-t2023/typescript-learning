@@ -49,6 +49,16 @@ function showTodos(): void {
     console.log(`完了: ${completedCount}件`);
 }
 
+function showPendingTodos(): void {
+    const pendingTodos = todos.filter(
+        (todo) => !todo.completed
+    );
+
+    pendingTodos.forEach((todo) => {
+        console.log(`${todo.id}: ${todo.title} [未完了]`);
+    });
+}
+
 function completeTodo(id: number): void {
     const todo = todos.find((todo) => todo.id === id);
     if(todo){
@@ -83,6 +93,8 @@ if(command === "add"){
     }
 } else if(command === "list"){    
     showTodos();
+} else if (command === "pending") {
+    showPendingTodos();    
 } else if(command === "complete"){
     const id = Number(title);
     if (Number.isInteger(id) && id > 0) {
