@@ -64,6 +64,21 @@ function showPendingTodos(): void {
     });
 }
 
+function showDoneTodos(): void {
+    const doneTodos = todos.filter(
+        (todo) => todo.completed
+    );
+
+    if (doneTodos.length === 0) {
+        console.log("完了済みのTodoはありません");
+        return;
+    }
+
+    doneTodos.forEach((todo) => {
+        console.log(`${todo.id}: ${todo.title} [完了]`);
+    });
+}
+
 function completeTodo(id: number): void {
     const todo = todos.find((todo) => todo.id === id);
     if(todo){
@@ -100,6 +115,8 @@ if(command === "add"){
     showTodos();
 } else if (command === "pending") {
     showPendingTodos();    
+} else if (command === "done") {
+    showDoneTodos();
 } else if(command === "complete"){
     const id = Number(title);
     if (Number.isInteger(id) && id > 0) {
@@ -137,6 +154,8 @@ function showHelp(): void {
   console.log("Todo CLIの使い方:");
   console.log("  add <タイトル>  Todoを追加");
   console.log("  list           Todo一覧を表示");
+  console.log("  pending        未完了Todoを表示");
+  console.log("  done           完了済みTodoを表示");
   console.log("  complete <ID>  Todoを完了");
   console.log("  delete <ID>    Todoを削除");
   console.log("  help           使い方を表示");
