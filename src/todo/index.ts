@@ -54,6 +54,11 @@ function showPendingTodos(): void {
         (todo) => !todo.completed
     );
 
+    if (pendingTodos.length === 0) {
+        console.log("未完了のTodoはありません");
+        return;
+    }
+
     pendingTodos.forEach((todo) => {
         console.log(`${todo.id}: ${todo.title} [未完了]`);
     });
