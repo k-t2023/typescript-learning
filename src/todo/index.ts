@@ -90,6 +90,18 @@ function completeTodo(id: number): void {
     }
 }
 
+function editTodo(id: number, newTitle: string): void {
+    const todo = todos.find((todo) => todo.id === id);
+
+    if (todo) {
+        todo.title = newTitle;
+        saveTodos("todos.json", todos);
+        console.log(`Todoを変更しました: ${newTitle}`);
+    } else {
+        console.log("タスクが見つかりません");
+    }
+}
+
 /*
 addTodo("TypeScriptを勉強する");
 addTodo("GitHubを学ぶ");
@@ -117,6 +129,16 @@ if(command === "add"){
     showPendingTodos();    
 } else if (command === "done") {
     showDoneTodos();
+
+} else if (command === "edit") {
+    const id = Number(process.argv[3]);
+    const newTitle = process.argv[4];
+
+    if (Number.isInteger(id) && id > 0 && newTitle?.trim()) {
+        editTodo(id, newTitle);
+    } else {
+        console.log("正しいIDと新しいタイトルを指定してください");
+    }    
 } else if(command === "complete"){
     const id = Number(title);
     if (Number.isInteger(id) && id > 0) {
@@ -156,6 +178,7 @@ function showHelp(): void {
   console.log("  list           Todo一覧を表示");
   console.log("  pending        未完了Todoを表示");
   console.log("  done           完了済みTodoを表示");
+  console.log("  edit <ID> <タイトル>  Todoのタイトルを変更");
   console.log("  complete <ID>  Todoを完了");
   console.log("  delete <ID>    Todoを削除");
   console.log("  help           使い方を表示");
