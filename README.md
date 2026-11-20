@@ -13,6 +13,11 @@ TodoのデータはJSONファイルに保存されるため、プログラムを
 - Todoの完了状態の更新
 - Todoの削除
 - JSONファイルへのデータ保存・読み込み
+- Todoの編集
+- キーワードからTodoを探す
+- 未完了・完了済みのTodoだけを表示する
+- 完了したTodoを未完了に戻す
+- ヘルプの表示
 
 ## セットアップ
 
@@ -38,6 +43,38 @@ npx tsx src/todo/index.ts complete 1
 ```bash
 npx tsx src/todo/index.ts delete 2
 ```
+5. Todoの検索（search）
+
+```bash
+npx tsx src/todo/index.ts search TypeScript
+
+6. Todoの編集（edit）
+
+```bash
+npx tsx src/todo/index.ts edit 2 "GitHubを復習する"
+```
+7. 未完了のTodoを表示（pending）
+
+```bash
+npx tsx src/todo/index.ts pending
+```
+8. 完了済みのTodoを表示（done）
+
+```bash
+npx tsx src/todo/index.ts done
+```
+9. 完了したTodoを未完了に戻す（undo）
+
+```bash
+npx tsx src/todo/index.ts undo 5
+```
+10. Todoのヘルプ（help）
+
+```bash
+npx tsx src/todo/index.ts help
+```
+
+
 
 ## ファイル構成
 

@@ -102,6 +102,19 @@ function undoTodo(id: number): void {
     }
 }
 
+function searchTodos(keyword: string): void {
+    const results = todos.filter((todo) =>
+        todo.title.includes(keyword)
+    );
+
+    results.forEach((todo) => {
+        const status = todo.completed ? "完了" : "未完了";
+        console.log(`${todo.id}: ${todo.title} [${status}]`);
+    });
+
+    console.log(`検索結果: ${results.length}件`);
+}
+
 
 function editTodo(id: number, newTitle: string): void {
     const todo = todos.find((todo) => todo.id === id);
@@ -167,6 +180,14 @@ if(command === "add"){
     } else {
         console.log("正しいIDを指定してください");
     }    
+} else if (command === "search") {
+    const keyword = process.argv[3];
+
+    if (keyword && keyword.trim() !== "") {
+        searchTodos(keyword);
+    } else {
+        console.log("検索キーワードを指定してください");
+    }    
 } else if(command === "delete"){  
     const id = Number(title);
     if (Number.isInteger(id) && id > 0) {
@@ -202,6 +223,7 @@ function showHelp(): void {
   console.log("  edit <ID> <タイトル>  Todoのタイトルを変更");
   console.log("  complete <ID>  Todoを完了");
   console.log("  undo <ID>     Todoを未完了に戻す");
+  console.log("  search <キーワード>  Todoを検索");
   console.log("  delete <ID>    Todoを削除");
   console.log("  help           使い方を表示");
 }
